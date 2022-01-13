@@ -1,7 +1,7 @@
 #include <sdk.hpp>
 #include <Server/Components/Vehicles/vehicles.hpp>
 
-struct CountVehiclesInRulesComponent : IComponent, PoolEventHandler<IVehicle> {
+struct CountVehiclesInRulesComponent final : IComponent, PoolEventHandler<IVehicle> {
 	PROVIDE_UUID(0x88f9172cc6eb78a3);
 
 	StringView componentName() const override {
@@ -30,13 +30,6 @@ struct CountVehiclesInRulesComponent : IComponent, PoolEventHandler<IVehicle> {
 		// Fire events here at earliest
 	}
 
-	~CountVehiclesInRulesComponent() {
-		// Clean up what you did above
-		if (vehicles) {
-			vehicles->getPoolEventDispatcher().removeEventHandler(this);
-		}
-	}
-
 	void onPoolEntryCreated(IVehicle& entry) override {
 		for (INetwork* network : core->getNetworks()) {
 			INetworkQueryExtension* query = queryExtension<INetworkQueryExtension>(network);
@@ -55,10 +48,28 @@ struct CountVehiclesInRulesComponent : IComponent, PoolEventHandler<IVehicle> {
 		}
 	}
 
+	void onFree(IComponent* component) override {
+		// Invalidate vehicles pointer so it can't be used past this point
+		if (component == vehicles) {
+			vehicles = nullptr;
+		}
+	}
+
+	~CountVehiclesInRulesComponent() {
+		// Clean up what you did above
+		if (vehicles) {
+			vehicles->getPoolEventDispatcher().removeEventHandler(this);
+		}
+	}
+
+	void free() override {
+		delete this;
+	}
+
 	ICore* core = nullptr;
 	IVehiclesComponent* vehicles = nullptr;
-} component;
+};
 
 COMPONENT_ENTRY_POINT() {
-	return &component;
+	return new CountVehiclesInRulesComponent();
 }
