@@ -4,3 +4,9 @@
 [submodule "pawn-natives"]
 	path = pawn-natives
 	url = https://github.com/openmultiplayer/pawn-natives
+[submodule "samp-plugin-sdk"]
+	path = samp-plugin-sdk
+	url = https://github.com/Y-Less/samp-plugin-sdk.git
+[submodule "cmake-modules"]
+	path = cmake-modules
+	url = https://github.com/Zeex/cmake-modules.git
