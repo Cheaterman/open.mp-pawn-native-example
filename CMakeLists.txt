@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(test-component LANGUAGES C CXX VERSION 0.0.1)
+project(HelloWorld LANGUAGES C CXX VERSION 0.0.1)
 
 add_subdirectory(sdk)
 
@@ -8,6 +8,7 @@ add_library(${PROJECT_NAME} SHARED
 	samp-plugin-sdk/amxplugin.cpp
 	samp-plugin-sdk/amxplugin2.cpp
 )
+set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 target_include_directories(${PROJECT_NAME} PRIVATE
 	pawn-natives

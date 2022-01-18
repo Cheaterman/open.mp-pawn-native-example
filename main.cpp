@@ -15,18 +15,17 @@ struct HelloComponent final : IComponent, PawnEventHandler {
 	}
 
 	SemanticVersion componentVersion() const override {
-		return SemanticVersion(0, 0, 0, 0);
+		return SemanticVersion(0, 0, 1, 0);
 	}
 
 	void onLoad(ICore* c) override {
 		core = c;
-		core->printLn("HelloWorld component loaded!");
 	}
 
 	void onInit(IComponentList* components) override {
 		pawnComponent = components->queryComponent<IPawnComponent>();
-		pawnComponent->getEventDispatcher().addEventHandler(this);
 		pAMXFunctions = (void *)&pawnComponent->getAmxFunctions();
+		pawnComponent->getEventDispatcher().addEventHandler(this);
 	}
 
 	void onReady() override {}
@@ -51,8 +50,7 @@ COMPONENT_ENTRY_POINT() {
 	return helloComponent;
 }
 
-PAWN_NATIVE(Hello, HelloWorld, bool())
+PAWN_NATIVE(Hello, HelloWorld, void())
 {
 	helloComponent->core->printLn("Hello, world!");
-	return true;
 }
