@@ -1,4 +1,4 @@
-# open.mp SDK example
+# open.mp Pawn native example
 
 ## Tools
 
@@ -15,9 +15,9 @@ Visual Studio needs the `Desktop development with C++` workload with the `MSVC v
 
 ```bash
 # With HTTPS:
-git clone --recursive https://github.com/openmultiplayer/open.mp-sdk-example
+git clone --recursive https://github.com/Cheaterman/open.mp-pawn-native-example.git
 # With SSH:
-git clone --recursive git@github.com:openmultiplayer/open.mp-sdk-example
+git clone --recursive git@github.com:Cheaterman/open.mp-pawn-native-example.git
 ```
 
 Note the use of the `--recursive` argument, because this repository contains submodules.
@@ -25,10 +25,18 @@ Note the use of the `--recursive` argument, because this repository contains sub
 ## Building on Windows
 
 ```bash
-cd  open.mp-sdk-example
+cd open.mp-pawn-native-example
 mkdir build
 cd build
 cmake .. -A Win32 -T ClangCL
 ```
 
 Open Visual Studio and build the solution.
+
+## Building on Linux
+
+```bash
+cd open.mp-pawn-native-example
+# Adjust CC/CXX to your clang/clang++ paths
+./build.sh
+```
