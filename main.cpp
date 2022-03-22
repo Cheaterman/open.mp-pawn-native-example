@@ -24,6 +24,18 @@ struct HelloComponent final : IComponent, PawnEventHandler {
 
 	void onInit(IComponentList* components) override {
 		pawnComponent = components->queryComponent<IPawnComponent>();
+
+		if(pawnComponent == nullptr) {
+			StringView name = componentName();
+			core->logLn(
+				LogLevel::Error,
+				"Error loading component %.*s: Pawn component not loaded",
+				name.length(),
+				name.data()
+			);
+			return;
+		}
+
 		pAMXFunctions = (void *)&pawnComponent->getAmxFunctions();
 		pawnComponent->getEventDispatcher().addEventHandler(this);
 	}
@@ -36,8 +48,17 @@ struct HelloComponent final : IComponent, PawnEventHandler {
 
 	void onAmxUnload(void* amx) override {}
 
+	void onFree(IComponent* component) override {
+		if(component == pawnComponent) {
+			pawnComponent = nullptr;
+			pAMXFunctions = nullptr;
+		}
+	}
+
 	void free() override {
-		pawnComponent->getEventDispatcher().removeEventHandler(this);
+		if(pawnComponent != nullptr)
+			pawnComponent->getEventDispatcher().removeEventHandler(this);
+
 		delete this;
 	}
 
