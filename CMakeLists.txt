@@ -16,7 +16,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 	samp-plugin-sdk/amx
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE
-	SDK
+	OMP-SDK
 )
 
 if(UNIX AND NOT APPLE)
