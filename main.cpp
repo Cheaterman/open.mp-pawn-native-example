@@ -8,7 +8,7 @@ HelloComponent* helloComponent = nullptr;
 extern void* pAMXFunctions;
 
 struct HelloComponent final : IComponent, PawnEventHandler {
-    PROVIDE_UID(0x1126fdb4780f11ec);
+    PROVIDE_UID(/* UID GOES HERE */);
 
     StringView componentName() const override
     {
