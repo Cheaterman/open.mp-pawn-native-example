@@ -22,6 +22,10 @@ git clone --recursive git@github.com:Cheaterman/open.mp-pawn-native-example.git
 
 Note the use of the `--recursive` argument, because this repository contains submodules.
 
+## Setting Up
+
+Every component needs a Unique Identifier (a UID) to differentiate it from all others.  This is a 64-bit number, often randomly generated.  You can obtain a new UID by going to:  https://open.mp/uid  Once you have the UID find `PROVIDE_UID(/* UID GOES HERE */);` in your component source code and replace it with the text obtained at that link.  The code will not compile until you have completed this stage.
+
 ## Building on Windows
 
 ```bash
