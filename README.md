@@ -24,7 +24,7 @@ Note the use of the `--recursive` argument, because this repository contains sub
 
 ## Setting Up
 
-Every component needs a Unique Identifier (a UID) to differentiate it from all others.  This is a 64-bit number, often randomly generated.  You can obtain a new UID by going to:  https://open.mp/uid  Once you have the UID find `PROVIDE_UID(/* UID GOES HERE */);` in your component source code and replace it with the text obtained at that link.  The code will not compile until you have completed this stage.
+Every component needs a Unique Identifier (a UID) to differentiate it from all others.  This is a 64-bit number, often randomly generated.  You can obtain a new UID by going to:  [open.mp/uid](https://open.mp/uid).  Once you have the UID find `PROVIDE_UID(/* UID GOES HERE */);` in your component source code and replace it with the text obtained at that link.  The code will not compile until you have completed this stage.
 
 ## Building on Windows
 
